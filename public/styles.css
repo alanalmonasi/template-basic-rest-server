@@ -1,0 +1,25 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+html {
+   font-size: 62.5%;
+}
+
+body {
+   line-height: 1;
+   font-family: sans-serif;
+   color: #444;
+   background-color: bisque;
+}
+
+.container {
+   max-width: 120rem;
+   height: 100vh;
+   padding: 0 3.2rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
