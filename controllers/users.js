@@ -1,46 +1,77 @@
 const { request, response } = require('express');
+const bcrypt = require('bcryptjs');
+const User = require('../models/user');
 
-const userGet = (req = request, res = response) => {
-   // const query = req.query;
+const userGet = async (req = request, res = response) => {
+   const { limit = 5, from = 0 } = req.query;
+
+   const [total, users] = await Promise.all([
+      User.countDocuments({ active: true }),
+      User.find({ active: true }).skip(+from).limit(+limit),
+   ]);
+
    res.json({
-      id: '1234567890',
-      name: 'FlintsGG',
+      total,
+      users,
    });
 };
 
-const userPost = (req = request, res = response) => {
-   // const {} = req.body;
+const userPost = async (req = request, res = response) => {
+   const { name, email, password, role } = req.body;
+
+   const user = new User({
+      name,
+      email,
+      password,
+      role,
+   });
+
+   const salt = bcrypt.genSaltSync();
+   user.password = bcrypt.hashSync(password, salt);
+
+   await user.save();
+
    res.json({
-      id: '1234567890',
-      name: 'FlintsGG',
+      msg: 'User created successfully',
+      user,
    });
 };
 
-const userPut = (req = request, res = response) => {
-   // const { id } = req.params;
-   // const query = req.query;
-   // const {} = req.body;
+const userPut = async (req = request, res = response) => {
+   const { id } = req.params;
+   const { _id, password, google, email, ...rest } = req.body;
+
+   if (password) {
+      const salt = bcrypt.genSaltSync();
+      rest.password = bcrypt.hashSync(password, salt);
+   }
+
+   const user = await User.findByIdAndUpdate(id, rest, { new: true });
+
    res.json({
-      id: '1234567890',
-      name: 'FlintsGG',
+      msg: 'User updated successfully!',
+      user,
    });
 };
 
 const userPatch = (req = request, res = response) => {
-   // const { id } = req.params;
-   // const query = req.query;
    res.json({
       id: '1234567890',
       name: 'FlintsGG',
    });
 };
 
-const userDelete = (req = request, res = response) => {
-   // const { id } = req.params;
-   // const query = req.query;
+const userDelete = async (req = request, res = response) => {
+   const { id } = req.params;
+   const user = await User.findByIdAndUpdate(
+      id,
+      { active: false },
+      { new: true }
+   );
+
    res.json({
-      id: '1234567890',
-      name: 'FlintsGG',
+      msg: `User with ID ${id} has ben successfully deleted!`,
+      user,
    });
 };
 
