@@ -2,7 +2,7 @@
 
 ### CRUD users
 
-This is a basic configuration of a rest server where you can create, read, update users from a mongodb using
+This is a basic configuration of a rest server where you can create, read, update and delete users from a mongodb
 
 Use `npm install` or `npm i` to install all the dependencies
 
