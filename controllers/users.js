@@ -56,8 +56,7 @@ const userPut = async (req = request, res = response) => {
 
 const userPatch = (req = request, res = response) => {
    res.json({
-      id: '1234567890',
-      name: 'FlintsGG',
+      msg: 'Patch request',
    });
 };
 

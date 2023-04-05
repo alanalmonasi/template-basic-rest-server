@@ -22,8 +22,16 @@ const idExist = async (id) => {
    }
 };
 
+const isActive = async (id) => {
+   const isActive = await User.findById(id);
+   if (!isActive.active) {
+      throw new Error('This account has been already deactivate');
+   }
+};
+
 module.exports = {
    emailExist,
    idExist,
+   isActive,
    validRole,
 };
