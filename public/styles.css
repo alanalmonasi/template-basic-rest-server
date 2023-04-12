@@ -20,6 +20,16 @@ body {
    height: 100vh;
    padding: 0 3.2rem;
    display: flex;
-   justify-content: center;
+   flex-direction: column;
    align-items: center;
+   justify-content: center;
+   gap: 1rem;
+}
+
+#google_signout {
+   border: none;
+   background-color: #fff;
+   width: 19rem;
+   height: 3.5rem;
+   border: 1px solid #ccc;
 }

@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const UserSchema = new Schema({
+const UserSchema = Schema({
    name: {
       type: String,
       required: [true, 'Name is mandatory'],
@@ -21,6 +21,7 @@ const UserSchema = new Schema({
       type: String,
       required: true,
       enum: ['admin_role', 'user_role'],
+      default: 'user_role',
    },
    active: {
       type: Boolean,
