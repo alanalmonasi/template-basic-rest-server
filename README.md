@@ -1,5 +1,7 @@
 # REST SERVER
 
+## This README file is valid for v2.1.0, you can check it out in the available tags
+
 ### CRUD users
 
 This is a basic configuration of a rest server where you can create, read, update and delete users from a mongodb
