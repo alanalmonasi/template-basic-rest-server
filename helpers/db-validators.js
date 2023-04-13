@@ -42,9 +42,20 @@ const productExist = async (id) => {
    }
 };
 
+const collectionsAllowed = (collection = '', collections = []) => {
+   const included = collections.includes(collection);
+   if (!included) {
+      throw new Error(
+         `The collection ${collection} is not allowed. Allowed colllections are: ${collections}`
+      );
+   }
+   return true;
+};
+
 module.exports = {
-   emailExist,
    categoryExist,
+   collectionsAllowed,
+   emailExist,
    idExist,
    isActive,
    productExist,
